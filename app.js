@@ -32,3 +32,21 @@ todoButton.addEventListener('click', (e) => {
 
   todoInput.value = ''
 })
+
+todoList.addEventListener('click', (e) => {
+  const item = e.target
+
+  if (item.classList[0] === 'delete-button') {
+    const todo = item.parentElement
+    todo.classList.add('fall')
+    // removeLocalTodos(todo)
+    todo.addEventListener('transitionend', () => {
+      todo.remove()
+    })
+  }
+
+  if (item.classList[0] === 'checked-button') {
+    const todo = item.parentElement
+    todo.classList.toggle('completed')
+  }
+})

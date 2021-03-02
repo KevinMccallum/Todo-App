@@ -15,6 +15,9 @@ todoButton.addEventListener('click', (e) => {
   newTodo.classList.add('todo-item')
   todoDiv.appendChild(newTodo)
 
+  //ADD TODO TO LOCAL STORAGE
+  saveLocalTodos(todoInput.value)
+
   //Create Delete Button
   const deleteButton = document.createElement('button')
   deleteButton.innerHTML = '<i class="fas fa-trash"></i>'
@@ -75,3 +78,16 @@ filterOption.addEventListener('click', (e) => {
     }
   })
 })
+
+const saveLocalTodos = (todo) => {
+  //Check if anything exists in local storage
+  let todos
+  if (localStorage.getItem('todos') === null) {
+    todos = []
+  } else {
+    todos = JSON.parse(localStorage.getItem('todos'))
+  }
+  //Save Todo to local storage
+  todos.push(todo)
+  localStorage.setItem('todos', JSON.stringify(todos))
+}
